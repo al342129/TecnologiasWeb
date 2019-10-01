@@ -43,6 +43,9 @@ switch ($action) {
     case "borrar":
         $central = "/borrar.php";
         break;
+    case "modificar":
+        $central = "/modificar.php";
+        break;
     default:
         $data["error"] = "Accion No permitida";
         $central = "/../partials/centralForm.php";

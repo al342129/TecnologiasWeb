@@ -1,7 +1,14 @@
+/**
+*@title: Exercici 12
+* @author Rocío y David &lt;al342129@uji.es&gt; * @copyright 2019 Rocío
+* @license CC-BY-NC-SA
+*/
+
 <?php
 include(dirname(__FILE__)."/../../../wp-config.php");
 
-$pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);  
+$pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD); 
+
 function insertar($pdo,$table,$valor) {
     $query = "INSERT INTO    $table (nombre) VALUES (?)";
     $consult = $pdo->prepare($query);
@@ -10,10 +17,10 @@ function insertar($pdo,$table,$valor) {
                      
 }
 function borrar($pdo,$table,$valor) {
-    $query = "DELETE   FROM   $table WHERE client_id =(?)";
+    $query = "DELETE   FROM   $table WHERE client_id=(?)";
     $consult = $pdo->prepare($query);
     $a=$consult->execute(array($valor)); 
-    if (1>$a) echo "InCorrecto1";
+    if (1>$a) echo "InCorrecto3";
                      
 }
 
@@ -24,6 +31,13 @@ function consultar($pdo,$table) {
     if (1>$a)echo "InCorrecto2";
     return ($consult->fetchAll(PDO::FETCH_ASSOC)); 
   
+}
+
+function modificar($pdo, $table, $valor){
+    $query = "UPDATE $table SET (nombre=?, apellidos=?, email=?, dni_?, clave=?, foto_file=?,) WHERE client_id =(?)";
+    $consult = $pdo->prepare($query);
+    $a=$consult->execute(array($valor));
+    if (1>$a)echo "InCorrecto";
 }
 
 function creatablaUsuarios($pdo,$table){
