@@ -51,6 +51,7 @@ function UB_MP_Register_Form($UB_MP_user , $UB_user_email)
         placeholder="kiko@ic.es" />
         <br/>
         <input type="file" name="foto_file"size="20" maxlength="25" value="<?php print $MP_user["foto_file"] ?>" />
+        <br/>
         <input type="submit" value="Enviar">
         <input type="reset" value="Deshacer">
     </form>
@@ -90,18 +91,8 @@ function UB_MP_my_datos()
                 print ("No has rellenado el formulario correctamente");
                 return;
             }
-            $fotoURL="";
-            $IMAGENES_USUARIOS='../fotos/';
-            if(array_key_exists('foto_file', $_FILES) && _POST['email']){
-                $fotoURL = $IMAGENES_USUARIOS.$POST['userName']."_".$_FILES['foto']['name'];
-                if (move_uploaded_file($_FILES['foto_file']['tmp_name'], $fotoURL))
-                    {   echo "foto subida con éxito";
-                    }
-            }
-
             $query = "INSERT INTO $table (nombre, email,clienteMail, foto_file) VALUES (?,?,?,?)";         
             $a=array($_REQUEST['userName'], $_REQUEST['email'],$_REQUEST['clienteMail'], $fotoURL);
-            //print_r($a)
             //$pdo1 = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD); 
             $consult = $UB_MP_pdo->prepare($query);
             $a=$consult->execute($a);
