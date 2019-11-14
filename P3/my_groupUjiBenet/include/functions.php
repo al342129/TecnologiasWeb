@@ -92,7 +92,7 @@ function UB_MP_my_datos()
             }
             $fotoURL="";
             $IMAGENES_USUARIOS='../fotos/';
-            if(array_key_exists('foto_file', $_FILES) && &_POST['email']){
+            if(array_key_exists('foto_file', $_FILES) && _POST['email']){
                 $fotoURL = $IMAGENES_USUARIOS.$POST['userName']."_".$_FILES['foto']['name'];
                 if (move_uploaded_file($_FILES['foto_file']['tmp_name'], $fotoURL))
                     {   echo "foto subida con éxito";
