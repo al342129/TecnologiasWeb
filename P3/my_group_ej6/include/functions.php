@@ -103,13 +103,13 @@ function MP_my_datos1()
                     }
             }
             
-            $query = "INSERT INTO $table (nombre, email,clienteMail, foto_file) VALUES (?,?,?,?)";         
-            $a=array($_REQUEST['userName'], $_REQUEST['email'],$_REQUEST['clienteMail'], $_REQUEST['foto_file']);
+            $query = "INSERT INTO $table (nombre, email, foto_file) VALUES (?,?,?)";         
+            $a=array($_REQUEST['userName'], $_REQUEST['email'], $_REQUEST['foto_file']);
             //$pdo1 = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD); 
             $consult = $MP_pdo->prepare($query);
             $a=$consult->execute($a);
             if (1>$a) {echo "InCorrecto $query";}
-            else wp_redirect(admin_url( 'admin-post.php?action=my_datos&proceso=listar'));
+            else wp_redirect(admin_url( 'admin-post.php?action=my_datos1&proceso=listar'));
             break;
             
         case "listar":
