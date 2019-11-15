@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function UB_MP_CrearT($ub_tabla){
     
     $UB_MP_pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD); 
-    $UB_query="CREATE TABLE IF NOT EXISTS $tabla (person_id INT(11) NOT NULL AUTO_INCREMENT, nombre VARCHAR(100),  email VARCHAR(100),  foto_file VARCHAR(25), clienteMail VARCHAR(100),  PRIMARY KEY(person_id))";
+    $UB_query="CREATE TABLE IF NOT EXISTS $tabla (person_id INT(11) NOT NULL AUTO_INCREMENT, nombre VARCHAR(100),  email VARCHAR(200),  foto_file VARCHAR(100), clienteMail VARCHAR(100),  PRIMARY KEY(person_id))";
     $UB_consult = $UB_MP_pdo->prepare($UB_query);
     $UB_consult->execute (array());
 }
@@ -91,6 +91,16 @@ function UB_MP_my_datos()
                 print ("No has rellenado el formulario correctamente");
                 return;
             }
+            
+            $fotoURL="";
+            $IMAGENES_USUARIOS = '../fotos/';
+            if(array_key_exists('foto_file', $_FILES) && $_POST['email']) {
+                $fotoURL = $IMAGENES_USUARIOS.$_POST['userName']."_".$_FILES['foto_file']['name'];
+                    if (move_uploaded_file($_FILES['foto_file']['tmp_name'], $fotoURL))
+                        { echo "foto subida con éxito";
+                    } 
+            }
+            
             $query = "INSERT INTO $table (nombre, email,clienteMail, foto_file) VALUES (?,?,?,?)";         
             $a=array($_REQUEST['userName'], $_REQUEST['email'],$_REQUEST['clienteMail'], $fotoURL);
             //$pdo1 = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD); 
@@ -103,9 +113,9 @@ function UB_MP_my_datos()
             //Listado amigos o de todos si se es administrador.
             $a=array();
             if (current_user_can('administrator')) {$query = "SELECT     * FROM       $table ";}
-            else {$campo="clienteMail";
-                $query = "SELECT     * FROM  $table      WHERE $campo =?";
-                $a=array( $user_email);
+            else {$campo="clienteMail"; $campo2="clienteMail";
+                $query = "SELECT     * FROM  $table      WHERE $campo = ? OR $campo2 = ? ";
+                $a=array( $user_email, $fotoURL);
  
             } 
 
