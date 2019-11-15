@@ -137,8 +137,7 @@ function MP_my_datos1()
                 foreach ($rows as $row) {
                     print "<tr>";
                     foreach ($row as $key => $val) {
-                        //echo "<td>", $val, "</td>";
-                        echo "<th>", $val, "</th>";
+                        echo "<td align='center'>", $val, "</td>";
                         
                     }
                     print "</tr>";
