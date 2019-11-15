@@ -31,7 +31,7 @@ function hook_css() {
 	</style>
 	<?php
 }
-add_action('wp_head', 'hook_css')
+//add_action('wp_head', 'hook_css')
 
 //La siguiente sentencia activaria la acción para todos los usuarios.
 //add_action('admin_post_nopriv_my_datos', 'my_datos');
