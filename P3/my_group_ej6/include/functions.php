@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function MP_CrearT1($tabla){
     
     $MP_pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD); 
-    $query="CREATE TABLE IF NOT EXISTS $tabla (person_id INT(11) NOT NULL AUTO_INCREMENT, nombre VARCHAR(100),  email VARCHAR(100),  foto_file VARCHAR(25), clienteMail VARCHAR(100),  PRIMARY KEY(person_id))";
+    $query="CREATE TABLE IF NOT EXISTS $tabla (person_id INT(11) NOT NULL AUTO_INCREMENT, nombre VARCHAR(100),  email VARCHAR(100),  foto_file VARCHAR(200), clienteMail VARCHAR(100),  PRIMARY KEY(person_id))";
     $consult = $MP_pdo->prepare($query);
     $consult->execute (array());
 }
@@ -52,7 +52,7 @@ function MP_Register_Form1($MP_user , $user_email)
         <br/>
         <label for="foto_file">Foto</label>
         <br/>
-        <input type="file" name="foto_file" class="item_requerid" size="20" maxlength="25" value="<?php print $MP_user["foto_file"] ?>"
+        <input type="file" name="foto_file" class="item_requerid" size="200" maxlength="25" value="<?php print $MP_user["foto_file"] ?>"
         <br/>
         <input type="submit" value="Enviar">
         <input type="reset" value="Deshacer">
@@ -93,8 +93,18 @@ function MP_my_datos1()
                 print ("No has rellenado el formulario correctamente");
                 return;
             }
-            $query = "INSERT INTO $table (nombre, email,clienteMail) VALUES (?,?,?)";         
-            $a=array($_REQUEST['userName'], $_REQUEST['email'],$_REQUEST['clienteMail'] );
+            
+            $fotoURL = "";
+            $IMAGENES_USUARIOS = '../fotos/';
+            if(array_key_exists('foto_file', $_FILES) && $_POST['email']){
+                $fotoURL = $IMAGENES_USUARIOS.$_POST['userName']."_".$_FILES['foto_file']['name'];
+                    if (move_uploaded_file($_FILES['foto_file']['tmp_name'], $foto_URL))
+                    { echo "foto subida con éxito";
+                    }
+            }
+            
+            $query = "INSERT INTO $table (nombre, email,clienteMail, foto_file) VALUES (?,?,?,?)";         
+            $a=array($_REQUEST['userName'], $_REQUEST['email'],$_REQUEST['clienteMail'], $_REQUEST['foto_file']);
             //$pdo1 = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD); 
             $consult = $MP_pdo->prepare($query);
             $a=$consult->execute($a);
@@ -104,9 +114,9 @@ function MP_my_datos1()
         case "listar":
             //Listado amigos o de todos si se es administrador.
             $a=array();
-            if (current_user_can('administrator')) {$query = "SELECT     * FROM       $table ";}
+            if (current_user_can('administrator')) {$query = "SELECT * FROM $table ";}
             else {$campo="clienteMail";
-                $query = "SELECT     * FROM  $table      WHERE $campo =?";
+                $query = "SELECT     * FROM  $table      WHERE $campo = ?";
                 $a=array( $user_email);
  
             } 
