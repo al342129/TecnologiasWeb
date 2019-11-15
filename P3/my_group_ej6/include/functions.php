@@ -120,7 +120,8 @@ function MP_my_datos1()
                 //$campo="clienteMail";
                 $campo="foto_file";
                 $query = "SELECT     * FROM  $table      WHERE $campo = ?";
-                $a=array( $user_email);
+                //$a=array( $user_email);
+                $a=array( $foto_file);
  
             } 
 
