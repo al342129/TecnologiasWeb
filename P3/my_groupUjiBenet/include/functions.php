@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function UB_MP_CrearT($ub_tabla){
     
     $UB_MP_pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD); 
-    $UB_query="CREATE TABLE IF NOT EXISTS $tabla (person_id INT(11) NOT NULL AUTO_INCREMENT, nombre VARCHAR(100),  email VARCHAR(200),  foto_file VARCHAR(100), clienteMail VARCHAR(100),  PRIMARY KEY(person_id))";
+    $UB_query="CREATE TABLE IF NOT EXISTS $tabla (person_id INT(11) NOT NULL AUTO_INCREMENT, nombre VARCHAR(100),  email VARCHAR(200),  foto_file VARCHAR(200), clienteMail VARCHAR(100),  PRIMARY KEY(person_id))";
     $UB_consult = $UB_MP_pdo->prepare($UB_query);
     $UB_consult->execute (array());
 }
@@ -50,11 +50,7 @@ function UB_MP_Register_Form($UB_MP_user , $UB_user_email)
         <input type="text" name="email" class="item_requerid" size="20" maxlength="25" value="<?php print $UB_MP_user["email"] ?>"
         placeholder="kiko@ic.es" />
         <br/>
-        <input type="file" name="foto_file" size="20" maxlength="25" value="<?php 
-        
-        
-        
-        print $UB_MP_user["foto_file"] ?>" />
+        <input type="file" name="foto_file" size="20" maxlength="25" value="<?php print $UB_MP_user["foto_file"] ?>" />
         <br/>
         <input type="submit" value="Enviar">
         <input type="reset" value="Deshacer">
@@ -113,6 +109,7 @@ function UB_MP_my_datos()
             if (1>$a) {echo "InCorrecto $query";}
             else wp_redirect(admin_url( 'admin-post.php?action=my_datos&proceso=listar'));
             break;
+            
         case "listar":
             //Listado amigos o de todos si se es administrador.
             $a=array();
