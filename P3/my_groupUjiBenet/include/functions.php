@@ -33,7 +33,7 @@ function UB_MP_Register_Form($UB_MP_user , $UB_user_email)
 {//formulario registro amigos de $user_email
     ?>
     <h1>Gestión de Usuarios </h1>
-    <form class="fom_usuario" action="?action=my_datos&proceso=registrar" method="POST">
+    <form class="fom_usuario" action="?action=ub_my_datos&proceso=registrar" enctype="multipart/form-data" method="POST">
         <label for="clienteMail">Tu correo</label>
         <br/>
         <input type="text" name="clienteMail"  size="20" maxlength="25" value="<?php print $user_email?>"
@@ -106,8 +106,8 @@ function UB_MP_my_datos()
             //$pdo1 = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD); 
             $consult = $UB_MP_pdo->prepare($UB_query);
             $a=$consult->execute($a);
-            if (1>$a) {echo "InCorrecto $UB_query";}
-            else wp_redirect(admin_url( 'admin-post.php?action=my_datos&proceso=listar'));
+           //if (1>$a) {echo "InCorrecto $UB_query";}
+           // else wp_redirect(admin_url( 'admin-post.php?action=my_datos&proceso=listar'));
             break;
             
         case "listar":
