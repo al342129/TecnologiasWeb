@@ -42,15 +42,19 @@ function UB_MP_Register_Form($UB_MP_user , $UB_user_email)
         <legend>Datos básicos</legend>
         <label for="nombre">Nombre</label>
         <br/>
-        <input type="text" name="userName" class="item_requerid" size="20" maxlength="25" value="<?php print $MP_user["userName"] ?>"
+        <input type="text" name="userName" class="item_requerid" size="20" maxlength="25" value="<?php print $UB_MP_user["userName"] ?>"
         placeholder="Miguel Cervantes" />
         <br/>
         <label for="email">Email</label>
         <br/>
-        <input type="text" name="email" class="item_requerid" size="20" maxlength="25" value="<?php print $MP_user["email"] ?>"
+        <input type="text" name="email" class="item_requerid" size="20" maxlength="25" value="<?php print $UB_MP_user["email"] ?>"
         placeholder="kiko@ic.es" />
         <br/>
-        <input type="file" name="foto_file"size="20" maxlength="25" value="<?php print $MP_user["foto_file"] ?>" />
+        <input type="file" name="foto_file" size="20" maxlength="25" value="<?php 
+        
+        
+        
+        print $UB_MP_user["foto_file"] ?>" />
         <br/>
         <input type="submit" value="Enviar">
         <input type="reset" value="Deshacer">
