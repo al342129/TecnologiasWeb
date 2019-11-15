@@ -4,8 +4,8 @@
  * *
  * * Descripción extensa: Iremos añadiendo cosas complejas en PHP.
  * *
- * * @author  Lola <dllido@uji.es> 
- * * @copyright 2018 Lola
+ * * @author  Rocio <al342129@uji.es> 
+ * * @copyright 2019 Rocio
  * * @license http://www.fsf.org/licensing/licenses/gpl.txt GPL 2 or later
  * * @version 2
  * */
@@ -33,7 +33,7 @@ function MP_Register_Form1($MP_user , $user_email)
 {//formulario registro amigos de $user_email
     ?>
     <h1>Gestión de Usuarios </h1>
-    <form class="fom_usuario" action="?action=my_datos&proceso=registrar" method="POST">
+    <form class="form_usuario" action="?action=my_datos1&proceso=registrar" method="POST">
         <label for="clienteMail">Tu correo</label>
         <br/>
         <input type="text" name="clienteMail"  size="20" maxlength="25" value="<?php print $user_email?>"
@@ -111,11 +111,14 @@ function MP_my_datos1()
             if (1>$a) {echo "InCorrecto $query";}
             else wp_redirect(admin_url( 'admin-post.php?action=my_datos&proceso=listar'));
             break;
+            
         case "listar":
             //Listado amigos o de todos si se es administrador.
             $a=array();
             if (current_user_can('administrator')) {$query = "SELECT * FROM $table ";}
-            else {$campo="clienteMail";
+            else {
+                //$campo="clienteMail";
+                $campo="foto_file";
                 $query = "SELECT     * FROM  $table      WHERE $campo = ?";
                 $a=array( $user_email);
  
