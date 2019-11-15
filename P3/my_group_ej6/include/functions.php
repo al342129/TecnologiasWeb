@@ -50,6 +50,10 @@ function MP_Register_Form1($MP_user , $user_email)
         <input type="text" name="email" class="item_requerid" size="20" maxlength="25" value="<?php print $MP_user["email"] ?>"
         placeholder="kiko@ic.es" />
         <br/>
+        <label for="foto_file">Foto</label>
+        <br/>
+        <input type="file" name="foto_file" class="item_requerid" size="20" maxlength="25" value="<?php print $MP_user["foto_file"] ?>"
+        <br/>
         <input type="submit" value="Enviar">
         <input type="reset" value="Deshacer">
     </form>
