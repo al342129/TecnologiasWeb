@@ -40,9 +40,9 @@ function hook_css() {
 	?>
 	<style>
 		.wp_head_example{
-			background-color: #F5ECCE;
-            font-weight: normal;
-            font-weight: bold;
+		    background-color: #F5ECCE;
+		    font-weight: normal;
+		    font-weight: bold;
 		}
 	</style>
 	<?php
