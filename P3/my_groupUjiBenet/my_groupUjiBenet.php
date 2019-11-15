@@ -20,7 +20,18 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 //Solo activado el hook para usuarios autentificados,  
 
-
+function hook_css() {
+	?>
+	<style>
+		.wp_head_example{
+		    background-color: #F5ECCE;
+		    font-weight: normal;
+		    font-weight: bold;
+		}
+	</style>
+	<?php
+}
+add_action('wp_head', 'hook_css')
 
 //La siguiente sentencia activaria la acción para todos los usuarios.
 //add_action('admin_post_nopriv_my_datos', 'my_datos');
@@ -34,20 +45,9 @@ function UB_MP_Ejecutar_crearT(){
     UB_MP_CrearT("A_GrupoCliente000");
 }
 //add_action('admin_post_nopriv_my_datos', 'UB_MP_my_datos'); //no autentificados
-add_action('admin_post_my_datos', "UB_MP_my_datos"); 
+add_action('admin_post_ub_my_datos', "UB_MP_my_datos"); 
 
-function hook_css() {
-	?>
-	<style>
-		.wp_head_example{
-		    background-color: #F5ECCE;
-		    font-weight: normal;
-		    font-weight: bold;
-		}
-	</style>
-	<?php
-}
-add_action('wp_head', 'hook_css')
+
 
 
 ?>
