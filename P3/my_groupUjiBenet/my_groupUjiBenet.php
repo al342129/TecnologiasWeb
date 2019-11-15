@@ -36,4 +36,18 @@ function UB_MP_Ejecutar_crearT(){
 //add_action('admin_post_nopriv_my_datos', 'MP_my_datos'); //no autentificados
 add_action('admin_post_my_datos', "MP_my_datos"); 
 
+function hook_css() {
+	?>
+	<style>
+		.wp_head_example{
+			background-color: #F5ECCE;
+            font-weight: normal;
+            font-weight: bold;
+		}
+	</style>
+	<?php
+}
+add_action('wp_head', 'hook_css')
+
+
 ?>
