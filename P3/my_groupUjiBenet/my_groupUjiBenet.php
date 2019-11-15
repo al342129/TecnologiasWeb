@@ -31,11 +31,11 @@ function hook_css() {
 	</style>
 	<?php
 }
-//add_action('wp_head', 'hook_css')
+add_action('wp_head', 'hook_css')
 
 //La siguiente sentencia activaria la acción para todos los usuarios.
 //add_action('admin_post_nopriv_my_datos', 'my_datos');
-$table="A_GrupoCliente000";
+$ub_table="A_GrupoCliente000";
 include(plugin_dir_path( __FILE__ ).'include/functions.php');
 
 register_activation_hook( __FILE__, 'UB_MP_Ejecutar_crearT');
