@@ -33,7 +33,7 @@ register_activation_hook( __FILE__, 'UB_MP_Ejecutar_crearT');
 function UB_MP_Ejecutar_crearT(){
     UB_MP_CrearT("A_GrupoCliente000");
 }
-add_action('admin_post_nopriv_my_datos', 'UB_MP_my_datos'); //no autentificados
+add_action('ub_my_datos', 'UB_MP_my_datos'); //no autentificados
 //add_action('my_datos', "UB_MP_my_datos"); 
 
 ?>
