@@ -20,10 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 
 //Funcion instalación plugin. Crea tabla
-function UB_MP_CrearT($ub_tabla){
+function UB_MP_CrearT($UB_table){
     
     $UB_MP_pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD); 
-    $UB_query="CREATE TABLE IF NOT EXISTS $tabla (person_id INT(11) NOT NULL AUTO_INCREMENT, nombre VARCHAR(100),  email VARCHAR(200),  foto_file VARCHAR(200), clienteMail VARCHAR(100),  PRIMARY KEY(person_id))";
+    $UB_query="CREATE TABLE IF NOT EXISTS $UB_table (person_id INT(11) NOT NULL AUTO_INCREMENT, nombre VARCHAR(100),  email VARCHAR(200),  foto_file VARCHAR(200), clienteMail VARCHAR(100),  PRIMARY KEY(person_id))";
     $UB_consult = $UB_MP_pdo->prepare($UB_query);
     $UB_consult->execute (array());
 }
@@ -101,26 +101,26 @@ function UB_MP_my_datos()
                     } 
             }
             
-            $query = "INSERT INTO $table (nombre, email,clienteMail, foto_file) VALUES (?,?,?,?)";         
+            $UB_query = "INSERT INTO $UB_table (nombre, email,clienteMail, foto_file) VALUES (?,?,?,?)";         
             $a=array($_REQUEST['userName'], $_REQUEST['email'],$_REQUEST['clienteMail'], $fotoURL);
             //$pdo1 = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD); 
-            $consult = $UB_MP_pdo->prepare($query);
+            $consult = $UB_MP_pdo->prepare($UB_query);
             $a=$consult->execute($a);
-            if (1>$a) {echo "InCorrecto $query";}
+            if (1>$a) {echo "InCorrecto $UB_query";}
             else wp_redirect(admin_url( 'admin-post.php?action=my_datos&proceso=listar'));
             break;
             
         case "listar":
             //Listado amigos o de todos si se es administrador.
             $a=array();
-            if (current_user_can('administrator')) {$query = "SELECT     * FROM       $table ";}
+            if (current_user_can('administrator')) {$UB_query = "SELECT     * FROM       $UB_table ";}
             else {$campo="clienteMail"; $campo2="clienteMail";
-                $query = "SELECT     * FROM  $table      WHERE $campo = ? OR $campo2 = ? ";
+                $UB_query = "SELECT     * FROM  $UB_table      WHERE $campo = ? OR $campo2 = ? ";
                 $a=array( $user_email, $fotoURL);
  
             } 
 
-            $consult = $UB_MP_pdo->prepare($query);
+            $consult = $UB_MP_pdo->prepare($UB_query);
             $a=$consult->execute($a);
             $rows=$consult->fetchAll(PDO::FETCH_ASSOC);
             if (is_array($rows)) {/* Creamos un listado como una tabla HTML*/
