@@ -139,7 +139,7 @@ function MP_my_datos1()
                     print "<tr>";
                     foreach ($row as $key => $val) {
                         if ($key == 'foto_file'){
-                            echo "<td>", '<img src="'.$val'" />', "</td>";
+                            echo "<td>", '<img src="'.$val.'" />', "</td>";
                         }
                         
                         else{
