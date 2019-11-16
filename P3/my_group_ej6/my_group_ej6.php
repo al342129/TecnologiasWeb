@@ -17,9 +17,7 @@ function hook_css(){
             .wp_head{ 
                 background-color:#F3E2A9;
             }
-            h1, h2, h3, h4 {
-                font-family: 'Lobster', cursive;
-             }
+           
             
         </style>
      <?php
