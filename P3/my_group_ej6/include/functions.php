@@ -133,11 +133,11 @@ function MP_my_datos1()
                 foreach ( array_keys($rows[0])as $key) {
                     echo "<td>", $key,"</td>";
                 }
-                print "</th>";
+                print "</tr>";
                 foreach ($rows as $row) {
                     print "<tr>";
                     foreach ($row as $key => $val) {
-                        echo "<td>", $val, "</td>";
+                        echo "<th>", $val, "</th>";
                         
                         
                     }
