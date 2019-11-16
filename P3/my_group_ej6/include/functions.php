@@ -128,16 +128,23 @@ function MP_my_datos1()
             $consult = $MP_pdo->prepare($query);
             $a=$consult->execute($a);
             $rows=$consult->fetchAll(PDO::FETCH_ASSOC);
+            
             if (is_array($rows)) {/* Creamos un listado como una tabla HTML*/
-                print '<div><table><th>';
+                print '<div><table><tr>';
                 foreach ( array_keys($rows[0])as $key) {
-                    echo "<td>", $key,"</td>";
+                    echo "<th>", $key,"</th>";
                 }
                 print "</tr>";
                 foreach ($rows as $row) {
                     print "<tr>";
                     foreach ($row as $key => $val) {
-                        echo "<th>", $val, "</th>";
+                        if ($key == 'foto_file'){
+                            echo "<td>", '<img src="'.$val'" />', "</td>";
+                        }
+                        
+                        else{
+                            echo "<td>", $val, "</td>";
+                        }
                         
                         
                     }
