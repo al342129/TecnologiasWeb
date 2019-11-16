@@ -17,7 +17,17 @@ function hook_css(){
             .wp_head{ 
                 background-color:#F3E2A9;
             }
-           
+			div.navigation-top{background-color: #D4AF37;
+				font-weight: bold;
+			}
+			
+			a{
+			color: solid black;
+			}
+			
+			footer#colophon.site-footer{background-color: #D4AF37;
+			}
+			
             
         </style>
      <?php
